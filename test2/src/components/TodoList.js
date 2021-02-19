@@ -18,7 +18,8 @@ function TodoList() {
     }
 
     const removeTodo = id =>{
-        return
+        const removeArr = [...todos].filter(todo => todo.id !== id)//create a new array with the elements that meets the condition. 
+        setTodos(removeArr)
     }
 
     const completeTodo = id =>{
