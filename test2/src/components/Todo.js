@@ -1,13 +1,26 @@
 import React, { useState } from 'react'
+import TodoForm from './TodoForm';
 import { RiCloseCircleLine } from 'react-icons/ri';
 import { TiEdit } from 'react-icons/ti';
 
-function Todo({ todos, completeTodo, removeTodo }) {
-    //update todo
+
+function Todo({todos, updateTodo, removeTodo, completeTodo}){
     const [edit, setEdit] = useState({
         id: null,
         value: ''
     })
+
+    const submitUpdate = value => {
+        updateTodo(edit.id, value)
+        setEdit({
+            id: null,
+            value:''
+        })
+    }
+
+    if(edit.id){
+        return <TodoForm edit={edit} onSubmit={submitUpdate}/>;
+    }
 
     return todos.map((todo, index) => ( //iterate over 'todos' array and get 'todo' element and its index
         <div className={todo.isComplete ? 'todo-row complete' : 'todo-row'} key={index}>
