@@ -1,21 +1,20 @@
-import React, {useState} from 'react'
-import TodoForm from './TodoForm'
-import {RiCloseCircleLine} from 'react-icons/ri'
+import React, { useState } from 'react'
+import { RiCloseCircleLine } from 'react-icons/ri';
+import { TiEdit } from 'react-icons/ti';
 
-function Todo() {
+function Todo({ todos, completeTodo, removeTodo }) {
+    //update todo
     const [edit, setEdit] = useState({
         id: null,
         value: ''
     })
 
-    return todos.map((todo,index) => (
+    return todos.map((todo, index) => ( //iterate over 'todos' array and get 'todo' element and its index
         <div className={todo.isComplete ? 'todo-row complete' : 'todo-row'} key={index}>
-            <div key={todo.id} onClick={() => completeTodo(todo.id)}>
-                {todo.text}
-            </div>
+            <div key={todo.id} onClick={() => completeTodo(todo.id)}> {todo.text} </div>
             <div className="icons">
-                <RiCloseCircleLine />
-                <TiEdit />
+                <RiCloseCircleLine onClick={() => removeTodo(todo.id)} className='delete-icon'/>
+                <TiEdit onClick={() => setEdit({id: todo.id, value: todo.text})} className='edit-icon'/>
             </div>
         </div>
     ))
