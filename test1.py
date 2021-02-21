@@ -11,11 +11,12 @@ def req():
     if request.method == 'POST':
         data = request.get_json() 
         if data:
-            return 'Data saved :)'
+            return ("Data saved",200,{})
     if request.method == 'GET':
-        response = ''
-        if data != '':
-            response += data['name']+','+data['last_name']+','+data['date_of_birth']+','+data['skills'][0]+','+data['skills'][1] #properties of the JSON object concatenated split by coma
+        response = '' #variable to concatenate 
+        if data:
+            #properties of the JSON object concatenated split by coma
+            response += data['name']+','+data['last_name']+','+data['date_of_birth']+','+data['skills'][0]+','+data['skills'][1]
         return response
         
 
