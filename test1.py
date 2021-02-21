@@ -1,6 +1,6 @@
 #test1: Flask Web Service
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, json, jsonify
 app = Flask(__name__)
 
 data = '' #variable to save the request data 
@@ -12,12 +12,16 @@ def req():
         data = request.get_json() 
         if data:
             return ("Data saved",200,{})
+            
     if request.method == 'GET':
-        response = '' #variable to concatenate 
+        response = ''
         if data:
-            #properties of the JSON object concatenated split by coma
-            response += data['name']+','+data['last_name']+','+data['date_of_birth']+','+data['skills'][0]+','+data['skills'][1]
+            dataList = [] #list to save json object values 
+            for val in data.values():
+                dataList.append(val)
+
+            response = ','.join([str(elem) for elem in dataList]) #concatenate list values with commas 
+        
         return response
         
-
 app.run()
